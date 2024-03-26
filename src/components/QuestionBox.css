@@ -1,0 +1,20 @@
+.question-container{
+  display: flex;
+  flex-direction: column;
+  width:90vw;
+  border-radius: 10px;
+  overflow: hidden;
+  font-family: var(--main-font);
+  margin:0 auto;
+}
+
+.question-title{
+  background-color: var(--purple-color);
+  padding:20px 10px;
+  color:white;
+}
+
+#question{
+  border:none;
+  padding:20px 10px;
+}

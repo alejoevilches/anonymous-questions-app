@@ -1,0 +1,17 @@
+@import url(/src/index.css);
+
+main{
+  background-color: var(--background-color);
+  height: 100vh;
+}
+
+.nav{
+  color:white;
+  width: 100vw;
+  padding:15px 0;
+  background-color: var(--purple-color);
+  font-family: var(--main-font);
+  font-size:1.5em;
+  text-align: center;
+  margin-bottom:10px;
+}
