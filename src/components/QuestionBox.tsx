@@ -15,7 +15,7 @@ export function QuestionBox(){
         <form className="question-container" onSubmit={handleSubmit}>
             <div className="question-info">
                 <label className="question-title" htmlFor="question">Ingresá tu pregunta</label>
-                <input type="text" name="question" id="question" />
+                <input type="text" name="question" id="question" autoComplete="off"/>
             </div>
             <button className="question-button" type="submit">Enviar pregunta</button>
         </form>

@@ -1,7 +1,6 @@
 import './App.css'
 import { QuestionBox } from './components/QuestionBox'
 import {Questions} from "./components/Questions"
-import { useQuestionsStore } from './store/useQuestionsStore'
 
 function App() {
   return (

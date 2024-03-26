@@ -6,6 +6,7 @@
 }
 
 .question-info{
+  max-width:900px;
   display: flex;
   width:90vw;
   flex-direction: column;
@@ -25,8 +26,13 @@
   padding:20px 10px;
 }
 
+#question:focus{
+  outline:none;
+}
+
 .question-button{
   margin-top:10px;
+  max-width:900px;
   background-color: var(--purple-color);
   border:none;
   font-family: var(--main-font);
