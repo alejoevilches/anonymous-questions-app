@@ -1,0 +1,24 @@
+.questions{
+  color:white;
+  font-family: var(--main-font);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-card{
+  width:65vw;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.question-card-title{
+  background-color: var(--purple-color);
+  padding:10px;
+}
+
+.question-card-info{
+  background-color:var(--input-color);
+  color:black;
+  padding:10px;
+}
