@@ -18,7 +18,7 @@ export function QuestionDetails(){
   useEffect(()=>{
     const imgNode=document.querySelector(".question-details-container")
 
-  htmlToImage.toPng(imgNode as HTMLElement)
+  htmlToImage.toPng(imgNode as HTMLElement, {height:200, width:500})
     .then(function (dataUrl) {
       const img = new Image();
       img.src = dataUrl;
