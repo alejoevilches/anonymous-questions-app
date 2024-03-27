@@ -16,10 +16,12 @@ export function QuestionDetails(){
   return (
     <main>
       <nav className='nav'>Anonymous Questions App</nav>
-      <section className="question-details-container">
-        <p className="question-details-title">Pregunta</p>
-        <p className="question-details-content">{q?.question}</p>
-      </section>
+      <div>
+        <section className="question-details-container">
+          <p className="question-details-title">Pregunta</p>
+          <p className="question-details-content">{q?.question}</p>
+        </section>
+      </div>
       <Link to={"/"}>
         <button className="back-button">Volver al inicio</button>
       </Link>
