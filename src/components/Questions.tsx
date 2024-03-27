@@ -1,4 +1,5 @@
 import { useQuestionsStore } from "../store/useQuestionsStore"
+import { Link } from "react-router-dom";
 import "./Questions.css"
 
 export function Questions(){
@@ -7,10 +8,12 @@ export function Questions(){
     <section className="questions">
       {questions.map(q=>{
         return (
-          <article className="question-card">
-            <p className="question-card-title">Pregunta</p>
-            <p className="question-card-info">{q.question}</p>
-          </article>
+          <Link to={`/contacts/${q.id}`}>
+            <article className="question-card">
+              <p className="question-card-title">Pregunta</p>
+              <p className="question-card-info">{q.question}</p>
+            </article>
+          </Link>
         )
       })}
     </section>
