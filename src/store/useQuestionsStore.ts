@@ -22,6 +22,5 @@ export const useQuestionsStore=create<QuestionsState>((set)=>({
     const newQuestions=[newQuestion,...questions]
     localStorage.setItem("questions", JSON.stringify(newQuestions))
     return {questions:newQuestions}
-  })
-
+  }),
 }))

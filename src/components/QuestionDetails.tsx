@@ -1,4 +1,6 @@
+import "./QuestionDetails.css"
 import { useQuestionsStore } from "../store/useQuestionsStore";
+import { Link } from "react-router-dom";
 
 export function QuestionDetails(){
   const {questions}=useQuestionsStore()
@@ -15,8 +17,12 @@ export function QuestionDetails(){
     <main>
       <nav className='nav'>Anonymous Questions App</nav>
       <section className="question-details-container">
-        <p>{q.question}</p>
+        <p className="question-details-title">Pregunta</p>
+        <p className="question-details-content">{q?.question}</p>
       </section>
+      <Link to={"/"}>
+        <button className="back-button">Volver al inicio</button>
+      </Link>
     </main>
   )
 }
