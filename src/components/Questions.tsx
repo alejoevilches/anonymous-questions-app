@@ -8,7 +8,7 @@ export function Questions(){
     <section className="questions">
       {questions.map(q=>{
         return (
-          <Link to={`/contacts/${q.id}`}>
+          <Link to={`/question/${q.id}`}>
             <article className="question-card">
               <p className="question-card-title">Pregunta</p>
               <p className="question-card-info">{q.question}</p>

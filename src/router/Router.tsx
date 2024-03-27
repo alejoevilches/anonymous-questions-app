@@ -9,6 +9,6 @@ export const Router=createBrowserRouter([
   },
   {
     path:"question/:questionId",
-    element:<QuestionDetails />
+    element:<QuestionDetails />,
   }
 ])
