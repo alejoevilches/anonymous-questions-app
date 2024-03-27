@@ -2,7 +2,6 @@ import "./QuestionDetails.css"
 import { useQuestionsStore } from "../store/useQuestionsStore";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import * as htmlToImage from 'html-to-image';
 
 export function QuestionDetails(){
   const {questions}=useQuestionsStore()
@@ -16,19 +15,6 @@ export function QuestionDetails(){
   const q=getQuestionFromId()
 
   useEffect(()=>{
-    const imgNode=document.querySelector(".question-details-container")
-
-  htmlToImage.toPng(imgNode as HTMLElement, {height:200, width:500})
-    .then(function (dataUrl) {
-      const img = new Image();
-      img.src = dataUrl;
-      const ogImageMetaTag=document.querySelector('meta[property="og:image"]');
-      ogImageMetaTag?.setAttribute("content", dataUrl);
-    })
-    .catch(function (error) {
-      console.error('oops, something went wrong!', error);
-  });
-
     const ogTitleMetaTag = document.querySelector('meta[property="og:title"]');
     const ogDescriptionMetaTag = document.querySelector('meta[property="og:description"]');
     if (ogTitleMetaTag && q){
