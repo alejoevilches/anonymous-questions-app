@@ -5,10 +5,19 @@ import { QuestionDetails } from '../components/QuestionDetails'
 export const Router=createBrowserRouter([
   {
     path:"/",
-    element:<App />
+    element:<App />,
+    children:[{
+      path:"/admin",
+      element:<App />,
+    }
+  ]
   },
   {
     path:"question/:questionId",
     element:<QuestionDetails />,
-  }
+  },
+    {
+      path:"/admin/question/:questionId",
+      element:<QuestionDetails />
+    }
 ])

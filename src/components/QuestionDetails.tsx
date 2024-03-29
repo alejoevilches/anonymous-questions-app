@@ -20,7 +20,6 @@ export function QuestionDetails(){
     htmlToImage.toBlob(questionDetailsNode as HTMLElement, {height:200})
       .then(function (blob) {
         if (blob !== null) {
-          // Copiar el blob de la imagen al portapapeles
           navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
             .then(function () {
               console.log("La pregunta se ha copiado correctamente al portapapeles.");

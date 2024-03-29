@@ -16,8 +16,18 @@
   max-width:400px;
 }
 
-.question-card-title{
+.question-card-header{
+  display:flex;
   background-color: var(--purple-color);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trash{
+  padding-right: 10px;
+}
+
+.question-card-title{
   padding:10px;
 }
 
