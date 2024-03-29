@@ -3,10 +3,16 @@ import { useQuestionsStore } from "../store/useQuestionsStore";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as htmlToImage from 'html-to-image';
+import { useAdmin } from "../hooks/useAdmin";
 
 export function QuestionDetails(){
   const {questions}=useQuestionsStore()
   const [isCopied, setIsCopied]=useState(false)
+  const {admin, checkAdmin}=useAdmin()
+
+  useEffect(()=>{
+    checkAdmin()
+  })
 
   const getQuestionFromId=()=>{
     const currentUrl=window.location.href
@@ -45,6 +51,7 @@ export function QuestionDetails(){
     }
   },[q])
 
+
   return (
     <main>
       <nav className='nav'>Anonymous Questions App</nav>
@@ -56,6 +63,12 @@ export function QuestionDetails(){
         <button className="back-button">Volver al inicio</button>
       </Link>
       <button className="back-button copy-button" onClick={copyQuestionImageToClipboard}>{isCopied ? "Copiado!" : "Copiar pregunta en el portapapeles"}</button>
+      {admin &&
+      <>
+        <button className="back-button">Eliminar pregunta</button>
+        <button className="back-button">Responder pregunta</button>
+      </>
+      }
     </main>
   )
 }

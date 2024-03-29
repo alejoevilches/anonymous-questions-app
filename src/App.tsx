@@ -3,20 +3,14 @@ import './App.css'
 import { QuestionBox } from './components/QuestionBox'
 import {Questions} from "./components/Questions"
 import {Fade} from "react-awesome-reveal"
+import { useAdmin } from './hooks/useAdmin'
 
 function App() {
-  const [admin, setAdmin]=useState(false);
-
-  const checkAdmin=()=>{
-    const url=window.location.href;
-    if (url.split("/").pop()==="admin"){
-      setAdmin(true);
-    }
-  }
+  const {admin, checkAdmin}=useAdmin()
 
   useEffect(()=>{
     checkAdmin()
-  },[])
+  })
 
   return (
     <main>
