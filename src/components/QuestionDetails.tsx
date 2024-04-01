@@ -1,14 +1,23 @@
 import "./QuestionDetails.css"
 import { useQuestionsStore } from "../store/useQuestionsStore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as htmlToImage from 'html-to-image';
 import { useAdmin } from "../hooks/useAdmin";
 
+interface QuestionDetailsState{
+  isCopied:boolean,
+  answerMode:boolean
+}
+
 export function QuestionDetails(){
-  const {questions}=useQuestionsStore()
-  const [isCopied, setIsCopied]=useState(false)
+  const {questions, deleteQuestion}=useQuestionsStore()
+  const [state, setState]=useState<QuestionDetailsState>({
+    isCopied:false,
+    answerMode:false
+  })
   const {admin, checkAdmin}=useAdmin()
+  const navigation=useNavigate()
 
   useEffect(()=>{
     checkAdmin()
@@ -32,7 +41,10 @@ export function QuestionDetails(){
             }).catch(function (error) {
               console.error("Error al copiar la pregunta al portapapeles:", error);
             });
-            setIsCopied(true);
+            setState({
+              ...state,
+              isCopied:true
+            });
         }
       })
       .catch(function (error) {
@@ -51,6 +63,25 @@ export function QuestionDetails(){
     }
   },[q])
 
+  const handleDeleteButton=async()=>{
+    const url=window.location.href;
+    const id=url.split("/").pop()
+    if (id) {
+      try {
+        await deleteQuestion(id);
+        return navigation("/admin")
+      } catch (error) {
+        console.error("Error al eliminar la pregunta:", error);
+      }
+    }
+  }
+
+  const handleAnswerButton=()=>{
+    setState({
+      ...state,
+      answerMode:true
+    })
+  }
 
   return (
     <main>
@@ -58,15 +89,16 @@ export function QuestionDetails(){
       <section className="question-details-container">
         <p className="question-details-title">Pregunta</p>
         <p className="question-details-content">{q?.question}</p>
+        {state.answerMode ? <input type="text" className="answer-input visible" placeholder="Ingresá acá tu respuesta"></input> : ""}
       </section>
-      <Link to={"/"}>
+      <Link to={admin ? "/admin" : "/"}>
         <button className="back-button">Volver al inicio</button>
       </Link>
-      <button className="back-button copy-button" onClick={copyQuestionImageToClipboard}>{isCopied ? "Copiado!" : "Copiar pregunta en el portapapeles"}</button>
+      <button className="back-button copy-button" onClick={copyQuestionImageToClipboard}>{state.isCopied ? "Copiado!" : "Copiar pregunta en el portapapeles"}</button>
       {admin &&
       <>
-        <button className="back-button">Eliminar pregunta</button>
-        <button className="back-button">Responder pregunta</button>
+        <button className="back-button" onClick={handleDeleteButton}>Eliminar pregunta</button>
+        <button className="back-button" onClick={handleAnswerButton}>Responder pregunta</button>
       </>
       }
     </main>

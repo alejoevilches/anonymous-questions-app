@@ -49,3 +49,12 @@ main{
 .copy-button:active{
   content: "Copiado!";
 }
+
+.answer-input{
+  border:none;
+  padding:10px;
+}
+
+.answer-input:focus{
+  outline:none;
+}
