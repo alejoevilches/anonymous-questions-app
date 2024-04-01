@@ -1,7 +1,7 @@
 import "./QuestionDetails.css"
 import { useQuestionsStore } from "../store/useQuestionsStore";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import * as htmlToImage from 'html-to-image';
 import { useAdmin } from "../hooks/useAdmin";
 
@@ -83,10 +83,11 @@ export function QuestionDetails(){
     })
   }
 
-  const handleAnswerForm=(e)=>{
+  const handleAnswerForm=(e:FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     const id=q?.id;
-    const answer=e.target.firstChild.value
+    const answerInput = e.currentTarget.elements[0] as HTMLInputElement
+    const answer=answerInput.value;
     id ? addAnswer(answer, id) : navigation("/admin")
     return navigation("/admin")
   }
