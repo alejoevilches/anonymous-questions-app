@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 import { QuestionBox } from './components/QuestionBox'
 import {Questions} from "./components/Questions"
