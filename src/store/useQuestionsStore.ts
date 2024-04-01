@@ -1,4 +1,3 @@
-import { FcAnswers } from "react-icons/fc"
 import {create} from "zustand"
 
 interface QuestionsState{
