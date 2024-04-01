@@ -1,9 +1,11 @@
+import { FcAnswers } from "react-icons/fc"
 import {create} from "zustand"
 
 interface QuestionsState{
   questions:Question[],
   addToQuestions:(q:string)=>void
   deleteQuestion:(qId:string)=>void
+  addAnswer:(ans:string, qId:string)=>void
 }
 
 const recoverQuestions:()=>Question[]=()=>{
@@ -31,5 +33,15 @@ export const useQuestionsStore=create<QuestionsState>((set)=>({
     const newQuestions=structuredClone(questions)
     newQuestions.splice(i,1)
     return {questions:newQuestions}
+  }),
+
+  addAnswer:(ans, qId)=>set((state)=>{
+    const {questions}=state;
+    const newQuestions=structuredClone(questions);
+    const id=newQuestions.findIndex(q=>q.id==qId);
+    newQuestions[id].answer=ans;
+    console.log(newQuestions)
+    return {questions:newQuestions}
   })
+
 }))

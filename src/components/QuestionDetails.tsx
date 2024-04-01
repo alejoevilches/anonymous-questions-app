@@ -11,7 +11,7 @@ interface QuestionDetailsState{
 }
 
 export function QuestionDetails(){
-  const {questions, deleteQuestion}=useQuestionsStore()
+  const {questions, deleteQuestion, addAnswer}=useQuestionsStore()
   const [state, setState]=useState<QuestionDetailsState>({
     isCopied:false,
     answerMode:false
@@ -83,13 +83,25 @@ export function QuestionDetails(){
     })
   }
 
+  const handleAnswerForm=(e)=>{
+    e.preventDefault()
+    const id=q?.id;
+    const answer=e.target.firstChild.value
+    id ? addAnswer(answer, id) : navigation("/admin")
+    return navigation("/admin")
+  }
+
   return (
     <main>
       <nav className='nav'>Anonymous Questions App</nav>
       <section className="question-details-container">
         <p className="question-details-title">Pregunta</p>
         <p className="question-details-content">{q?.question}</p>
-        {state.answerMode ? <input type="text" className="answer-input visible" placeholder="Ingresá acá tu respuesta"></input> : ""}
+        {state.answerMode || q?.answer ? 
+        <form className="answer-form" onSubmit={handleAnswerForm}>
+          <input type="text" className="answer-input visible" placeholder="Ingresá acá tu respuesta" defaultValue={q?.answer}></input>
+        </form>
+        : ""}
       </section>
       <Link to={admin ? "/admin" : "/"}>
         <button className="back-button">Volver al inicio</button>

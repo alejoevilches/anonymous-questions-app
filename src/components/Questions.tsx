@@ -32,6 +32,7 @@ export function Questions({admin}:QuestionsProps){
                 {admin && <FaRegTrashAlt className="trash" onClick={()=>handleDelete(q.id)}/> }
               </div>
               <p className="question-card-info">{q.question}</p>
+              {q.answer && <p className="question-card-answer">{q.answer}</p>}
             </article>
         )
       })}
