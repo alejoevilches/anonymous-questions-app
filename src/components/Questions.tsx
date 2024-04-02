@@ -20,6 +20,12 @@ export function Questions({admin}:QuestionsProps){
     deleteQuestion(id)
   }
 
+  const category=window.location.href.split("/").pop()
+
+  if (category){
+    questions.filter(q=>q.category===category)
+  }
+
   return (
     <section className="questions">
       {questions.map(q=>{
