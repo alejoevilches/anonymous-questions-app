@@ -2,13 +2,20 @@ import "./QuestionBox.css"
 import { useQuestionsStore } from "../store/useQuestionsStore";
 import { FormEvent } from "react";
 
-export function QuestionBox(){  
-    const {addToQuestions}=useQuestionsStore();  
+interface QuestionBoxProps{
+    category:string
+}
+
+export function QuestionBox({category}:QuestionBoxProps){  
+    const {addToQuestions}=useQuestionsStore();
+
+    
+    //Handler del submit, que manda toda la info al store de las preguntas para agregarlas.
     const handleSubmit=(e:FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         const form = e.target as HTMLFormElement;
         const question = form.elements.namedItem("question") as HTMLFormElement
-        addToQuestions(question.value);
+        addToQuestions(question.value, category);
     }
 
     return (

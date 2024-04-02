@@ -2,7 +2,7 @@ import {create} from "zustand"
 
 interface QuestionsState{
   questions:Question[],
-  addToQuestions:(q:string)=>void
+  addToQuestions:(q:string, category:string)=>void
   deleteQuestion:(qId:string)=>void
   addAnswer:(ans:string, qId:string)=>void
 }
@@ -15,14 +15,16 @@ const recoverQuestions:()=>Question[]=()=>{
 export const useQuestionsStore=create<QuestionsState>((set)=>({
   questions:recoverQuestions(),
 
-  addToQuestions:(q:string)=>set((state)=>{
+  addToQuestions:(q:string, category:string)=>set((state)=>{
     const {questions}=state;
     const newQuestion:Question={
       id:crypto.randomUUID(),
       question:q,
+      category:category
     }
     const newQuestions=[newQuestion,...questions]
     localStorage.setItem("questions", JSON.stringify(newQuestions))
+    console.log(newQuestion);
     return {questions:newQuestions}
   }),
 
