@@ -22,6 +22,7 @@ export function Questions({admin, category}:QuestionsProps){
     deleteQuestion(id)
   }
 
+  //Filtrar las preguntas por categoria (si es que existe una categoria)
   const filteredQuestions=category ? questions.filter(q=>q.category===category) : questions
 
   return (
