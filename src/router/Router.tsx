@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import { QuestionDetails } from '../components/QuestionDetails'
+import { categories } from '../utils/constants'
 
-const categories = ['politica', 'musica', 'programacion', 'deporte']
 const categoryRoutes=categories.map((cat)=>{
   return {
     path:`/${cat}`,
@@ -31,6 +31,10 @@ export const Router=createBrowserRouter([
   },
   {
     path:":category/question/:questionId",
+    element:<QuestionDetails />,
+  },
+  {
+    path:":category/admin/question/:questionId",
     element:<QuestionDetails />,
   },
   {

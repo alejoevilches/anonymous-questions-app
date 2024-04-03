@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState, FormEvent } from "react";
 import * as htmlToImage from 'html-to-image';
 import { useAdmin } from "../hooks/useAdmin";
+import { useCategory } from "../hooks/useCategory";
 
 interface QuestionDetailsState{
   isCopied:boolean,
@@ -17,10 +18,12 @@ export function QuestionDetails(){
     answerMode:false
   })
   const {admin, checkAdmin}=useAdmin()
+  const {category, checkCategory}=useCategory();
   const navigation=useNavigate()
 
   useEffect(()=>{
     checkAdmin()
+    checkCategory();
   })
 
   const getQuestionFromId=()=>{
@@ -92,6 +95,12 @@ export function QuestionDetails(){
     return navigation("/admin")
   }
 
+  const redirectPage=()=>{
+    const isAdmin = admin ? "admin/" : "";
+    const categoryPath = category ? `${category}/` : "";
+    return `/${categoryPath}${isAdmin}`
+  }
+
   return (
     <main>
       <nav className='nav'>Anonymous Questions App</nav>
@@ -104,7 +113,7 @@ export function QuestionDetails(){
         </form>
         : ""}
       </section>
-      <Link to={admin ? "/admin" : "/"}>
+      <Link to={redirectPage()}>
         <button className="back-button">Volver al inicio</button>
       </Link>
       <button className="back-button copy-button" onClick={copyQuestionImageToClipboard}>{state.isCopied ? "Copiado!" : "Copiar pregunta en el portapapeles"}</button>

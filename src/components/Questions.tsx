@@ -25,13 +25,19 @@ export function Questions({admin, category}:QuestionsProps){
   //Filtrar las preguntas por categoria (si es que existe una categoria)
   const filteredQuestions=category ? questions.filter(q=>q.category===category) : questions
 
+  const redirectPage = (q: Question): string => {
+    const isAdmin = admin ? "admin/" : "";
+    const categoryPath = category ? `${category}/` : "";
+    return `${categoryPath}${isAdmin}question/${q.id}`;
+  };
+
   return (
     <section className="questions">
       {filteredQuestions.map(q=>{
         return (
             <article key={q.id} className="question-card">
               <div className="question-card-header">
-                <Link to={admin ? `admin/question/${q.id}` : `question/${q.id}`} key={q.id}>
+                <Link to={redirectPage(q)} key={q.id}>
                   <p className="question-card-title">Pregunta</p>
                 </Link>
                 {admin && <FaRegTrashAlt className="trash" onClick={()=>handleDelete(q.id)}/> }
