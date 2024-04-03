@@ -25,6 +25,7 @@ export function Questions({admin, category}:QuestionsProps){
   //Filtrar las preguntas por categoria (si es que existe una categoria)
   const filteredQuestions=category ? questions.filter(q=>q.category===category) : questions
 
+  //Funcion para crear la redireccion a las rutas segun si es admin o si está en alguna categoria
   const redirectPage = (q: Question): string => {
     const isAdmin = admin ? "admin/" : "";
     const categoryPath = category ? `${category}/` : "";
