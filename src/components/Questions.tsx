@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Questions.css"
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 interface QuestionsProps{
   admin:boolean,
@@ -11,19 +12,22 @@ interface QuestionsProps{
 
 export function Questions({admin, category}:QuestionsProps){
   const {questions, deleteQuestion}=useQuestionsStore();
+  const location=useLocation()
+
+  //Filtrar las preguntas por categoria (si es que existe una categoria)
+  const filterQuestions=()=>{
+    return category ? questions.filter(q=>q.category===category) : questions
+  }
   
   //Actualizar el local storage cada vez que se crea una nueva pregunta
   useEffect(()=>{
     localStorage.setItem("questions", JSON.stringify(questions))
-  },[questions])
+  },[questions, location])
 
   //Handler para eliminar las preguntas si se aprieta el trash icon
   const handleDelete=(id:string)=>{
     deleteQuestion(id)
   }
-
-  //Filtrar las preguntas por categoria (si es que existe una categoria)
-  const filteredQuestions=category ? questions.filter(q=>q.category===category) : questions
 
   //Funcion para crear la redireccion a las rutas segun si es admin o si está en alguna categoria
   const redirectPage = (q: Question): string => {
@@ -34,7 +38,7 @@ export function Questions({admin, category}:QuestionsProps){
 
   return (
     <section className="questions">
-      {filteredQuestions.map(q=>{
+      {filterQuestions().map(q=>{
         return (
             <article key={q.id} className="question-card">
               <div className="question-card-header">
