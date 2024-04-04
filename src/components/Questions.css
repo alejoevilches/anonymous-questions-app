@@ -16,6 +16,10 @@
   max-width:400px;
 }
 
+.question-card:last-child{
+  margin-bottom: 30px;
+}
+
 .question-card-header{
   display:flex;
   background-color: var(--purple-color);
@@ -53,5 +57,9 @@ a {
 @media screen and (min-width:800px) {
   .questions{
     flex-direction: row;
+  }
+
+  .question-card:last-child{
+    margin:0;
   }
 }
