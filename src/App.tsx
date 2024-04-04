@@ -13,13 +13,13 @@ function App() {
   const {category, checkCategory}=useCategory()
   const location=useLocation()
 
+  //Por unica vez, cuando iniciamos la app, chequear si estamos en admin o en alguna categoria
   useEffect(()=>{
     checkAdmin();
     checkCategory()
-    console.log(category)
   },[checkAdmin, checkCategory, location, category])
 
-
+  //Formatear el texto de las categorias para que quede bien en los botones.
   const formattedCategories=categories.map(cat => cat.charAt(0).toUpperCase() + cat.slice(1));
 
   return (

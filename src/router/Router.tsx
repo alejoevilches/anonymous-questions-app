@@ -3,6 +3,7 @@ import App from '../App'
 import { QuestionDetails } from '../components/QuestionDetails'
 import { categories } from '../utils/constants'
 
+//Funcion que crea dinamicamente la ruta de las categorias, por si en el futuro queremos agregar mas
 const categoryRoutes=categories.map((cat)=>{
   return {
     path:`/${cat}`,

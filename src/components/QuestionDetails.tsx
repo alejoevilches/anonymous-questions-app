@@ -13,25 +13,32 @@ interface QuestionDetailsState{
 
 export function QuestionDetails(){
   const {questions, deleteQuestion, addAnswer}=useQuestionsStore()
+
+  //Crea los estados del componente
   const [state, setState]=useState<QuestionDetailsState>({
     isCopied:false,
     answerMode:false
   })
+
   const {admin, checkAdmin}=useAdmin()
   const {category, checkCategory}=useCategory();
   const navigation=useNavigate()
 
+  //Por unica vez, cuando se monta el componente, chequea si el usuario esta en la ruta admin o en alguna categoria
   useEffect(()=>{
     checkAdmin()
     checkCategory();
   })
 
+  
+  //Funcion que recupera la pregunta teniendo en cuenta el id que se encuentra en la ruta
   const getQuestionFromId=()=>{
     const currentUrl=window.location.href
     const id=currentUrl.split("/").pop();
     return questions.find((q)=>q.id===id)
   }
 
+  //Funcion para crear una imagen en base al div de la pregunta y guardarla en el portapapeles
   const copyQuestionImageToClipboard = () => {
     const questionDetailsNode = document.querySelector(".question-details-container");
   
@@ -55,8 +62,10 @@ export function QuestionDetails(){
       });
   };
   
+  //Guardar en una variable la pregunta con la que trabajaremos
   const q = getQuestionFromId();
 
+  //Crear dinamicamente los atributos de Open Graph
   useEffect(()=>{
     const ogTitleMetaTag = document.querySelector('meta[property="og:title"]');
     const ogDescriptionMetaTag = document.querySelector('meta[property="og:description"]');
@@ -66,6 +75,7 @@ export function QuestionDetails(){
     }
   },[q])
 
+  //Funcion para manejar el handling del boton que elimina la pregunta
   const handleDeleteButton=async()=>{
     const url=window.location.href;
     const id=url.split("/").pop()
@@ -79,6 +89,7 @@ export function QuestionDetails(){
     }
   }
 
+  //Funcion que activa el modo respuesta en la aplicacion
   const handleAnswerButton=()=>{
     setState({
       ...state,
@@ -86,6 +97,7 @@ export function QuestionDetails(){
     })
   }
 
+  //Funcion que maneja la logica aplicable ante la respuesta de una pregunta
   const handleAnswerForm=(e:FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     const id=q?.id;
@@ -95,6 +107,7 @@ export function QuestionDetails(){
     return navigation("/admin")
   }
 
+  //Funcion que se encarga de manejar la redireccion en caso de que querramos volver al inicio
   const redirectPage=()=>{
     const isAdmin = admin ? "admin/" : "";
     const categoryPath = category ? `${category}/` : "";

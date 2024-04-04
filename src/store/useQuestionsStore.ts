@@ -7,14 +7,17 @@ interface QuestionsState{
   addAnswer:(ans:string, qId:string)=>void
 }
 
+//Chequear si existen preguntas en el localStorage, y de ser asi, recuperarlas para renderizarlas
 const recoverQuestions:()=>Question[]=()=>{
   const savedQuestions=localStorage.getItem("questions")
   return savedQuestions ? JSON.parse(savedQuestions) : []
 }
 
 export const useQuestionsStore=create<QuestionsState>((set)=>({
+  //Las preguntas
   questions:recoverQuestions(),
 
+  //Logica para agregar las preguntas que se crean al estado global
   addToQuestions:(q:string, category:string)=>set((state)=>{
     const {questions}=state;
     const newQuestion:Question={
@@ -28,6 +31,7 @@ export const useQuestionsStore=create<QuestionsState>((set)=>({
     return {questions:newQuestions}
   }),
 
+  //Logica para eliminar las preguntas que se deseen borrar del estado global
   deleteQuestion:(qId:string)=>set((state)=>{
     const {questions}=state;
     const i=questions.findIndex(q=>q.id===qId)
@@ -36,6 +40,7 @@ export const useQuestionsStore=create<QuestionsState>((set)=>({
     return {questions:newQuestions}
   }),
 
+  //Logica para agregar las respuestas a las preguntas en el estado global
   addAnswer:(ans, qId)=>set((state)=>{
     const {questions}=state;
     const newQuestions=structuredClone(questions);
