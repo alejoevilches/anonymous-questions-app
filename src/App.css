@@ -18,7 +18,10 @@ main{
 
 .categories{
   display:flex;
+  flex-wrap: wrap;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   gap:10px;
   margin-bottom:10px;
 }
